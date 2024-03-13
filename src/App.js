@@ -1,22 +1,29 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const nameToDisplay = 'i am vivek';
+    let index = 0;
+
+    const interval = setInterval(() => {
+      if (index <= nameToDisplay.length) {
+        setName(nameToDisplay.substring(0, index));
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 300); 
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="centered">
+      <header>
+        {name}
       </header>
     </div>
   );
